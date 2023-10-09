@@ -146,9 +146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 314d0d78ca055fe4692cb9c47a1dabf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  minForce: 0.2
-  maxForce: 0.5
+  speed: 10
+  minForce: 0.1
+  maxForce: 0.4
   knockBackAngles:
   - 45
   - -45
