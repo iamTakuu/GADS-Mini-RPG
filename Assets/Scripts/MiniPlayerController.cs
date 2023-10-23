@@ -7,8 +7,10 @@ using UnityEngine.Serialization;
 public class MiniPlayerController : MonoBehaviour
 {
     [SerializeField] private Collider2D _collider;
+    [SerializeField] private Animator _animator;
     [SerializeField] private float _coolDownTime = 1f;
     [SerializeField] private float _activeTime = 0.2f;
+    
     private bool _coolDownActive;
     
     [Space(5)]
@@ -23,7 +25,9 @@ public class MiniPlayerController : MonoBehaviour
     }
     
     private Lane _currentLane = Lane.Middle;
-   
+    private static readonly int PunchTrigger = Animator.StringToHash("triggerPunch");
+    private static readonly int KickTrigger = Animator.StringToHash("triggerKick");
+
 
     private void Awake()
     {
@@ -68,6 +72,14 @@ public class MiniPlayerController : MonoBehaviour
     
     private IEnumerator AttackCoolDown()
     {
+        //Randomize attack
+        int attack = UnityEngine.Random.Range(0, 2);
+        if (attack == 0)
+            _animator.SetTrigger(PunchTrigger);
+        else
+            _animator.SetTrigger(KickTrigger);
+        
+        
         _collider.enabled = true;
         yield return new WaitForSeconds(_activeTime);
         _collider.enabled = false;

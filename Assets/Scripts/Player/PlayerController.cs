@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
    [SerializeField] private float jumpForce = 5f;
    
    private Vector2 moveInput;
+   bool movingBackwards;
    
    [SerializeField] private LayerMask groundLayer;
    [SerializeField] private Transform groundPoint;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
    [SerializeField] private SpriteRenderer spriteRenderer;
    private static readonly int MoveSpeed = Animator.StringToHash("moveSpeed");
    private static readonly int OnGround = Animator.StringToHash("onGround");
+   private static readonly int MovingBackwards = Animator.StringToHash("movingBackwards");
 
    private void Update()
    {
@@ -41,6 +43,13 @@ public class PlayerController : MonoBehaviour
          spriteRenderer.flipX = true;
       else if(spriteRenderer.flipX && moveInput.x < 0)
          spriteRenderer.flipX = false;
+      
+      if(!movingBackwards && moveInput.y > 0)
+         movingBackwards = true;
+      else if(movingBackwards && moveInput.y < 0)
+         movingBackwards = false;
+      
+      anim.SetBool(MovingBackwards, movingBackwards);
    }
    
    private void GroundCheck()
