@@ -8,6 +8,8 @@ using UnityEngine;
 public class MiniGameUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _defectCounter;
+    [SerializeField] private CanvasGroup _canvasGroup;
+    [SerializeField] private CanvasGroup _gameOverCanvasGroup;
     private int _defectCount;
    
     public void IncrementCounter(int count)
@@ -19,7 +21,12 @@ public class MiniGameUI : MonoBehaviour
     }
     public void OnGameOver()
     {
-        _defectCounter.text = "Game Over";
+        _defectCounter.text = "X";
+        _gameOverCanvasGroup.DOFade(1, 1.5f);
         //Time.timeScale = 0;
+    }
+    public void FadeInUI()
+    {
+        _canvasGroup.DOFade(1, 0.5f);
     }
 }
